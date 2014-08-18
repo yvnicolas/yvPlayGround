@@ -1,0 +1,17 @@
+<archetype>
+	<id>dyn-webapp-archetype</id>
+	<sources>
+		<source>src/main/java/controllers/HomeController.java</source>
+		<source>src/main/java/config/WebappConfig.java</source>
+		<source>src/main/java/config/WebMvcConfig.java</source>
+	</sources>
+	<testSources>
+	    <source>src/test/java/TestTemplate.java</source>
+	</testSources>
+	<resources>
+		<resource>src/main/webapp/WEB-INF/web.xml</resource>
+		<resource>src/main/webapp/WEB-INF/views/home.jsp</resource>
+		<resource>src/main/resources/log4j.xml</resource>
+		<resource>src/main/resources/application.properties</resource>
+	</resources>
+</archetype>

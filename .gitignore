@@ -1,0 +1,20 @@
+
+## Was created from an eclipse workspace repo
+
+.metadata/*
+RemoteSystemsTempFiles/*
+*/target/*
+*/bin/*
+.project
+.classpath
+.settings/*
+*~
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# LOG FILES #
+*.log

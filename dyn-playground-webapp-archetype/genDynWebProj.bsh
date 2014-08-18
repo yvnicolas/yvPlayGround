@@ -1,0 +1,8 @@
+mvn  archetype:generate \
+ -DarchetypeGroupId=com.dynamease \
+ -DarchetypeArtifactId=dyn-playground-webapp-archetype \
+ -DarchetypeVersion=1.0-SNAPSHOT \
+ -DgroupId=com.dynamease \
+ -DartifactId=$1 \
+ -Dpackage=com.dynamease.$1 \
+ -Dversion=1.0.0-SNAPSHOT
