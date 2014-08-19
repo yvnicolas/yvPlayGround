@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.dynamease.basicentities.DynPerson;
 import com.dynamease.basicentities.DynSubscriber;
 import com.dynamease.basicentities.DynSubscriber.SubLevel;
+import com.googlecode.jsonrpc4j.JsonRpcParamName;
 
 public class DynJsonUserServiceImpl implements DynJsonUserService {
     
@@ -18,20 +19,20 @@ public class DynJsonUserServiceImpl implements DynJsonUserService {
     }
 
     @Override
-    public DynSubscriber retrieveFromEmail(String email) {
-        // TODO Auto-generated method stub
-        return null;
+    public DynSubscriber retrieveFromEmail( String email) {
+       logger.debug("Retrieving email {}", email);
+        return new DynSubscriber("Georges", "Feydeau");
     }
 
     @Override
     public DynSubscriber guestSignUp(DynPerson newGuest, String email, String phone) {
-        // TODO Auto-generated method stub
-        return null;
+       logger.debug("Signing up guest : {} with email {} and phone {}");
+       return new DynSubscriber(newGuest.getFirstName(), newGuest.getLastName());
     }
 
     @Override
     public boolean subscriberSignin(String email, String password) {
-        // TODO Auto-generated method stub
+        logger.debug("Signing up subscriber  with email {} and password {}");
         return false;
     }
 

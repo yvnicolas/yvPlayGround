@@ -44,7 +44,7 @@ public class WebappConfig {
         return new DynJsonUserServiceImpl();
     }
     
-    @Bean
+    @Bean (name = "/jsonRq")
     public JsonServiceExporter jsonServiceExporter() {
         JsonServiceExporter toReturn = new JsonServiceExporter();
         toReturn.setServiceInterface(DynJsonUserService.class);

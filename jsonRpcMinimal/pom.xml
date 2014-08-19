@@ -29,8 +29,8 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
-		
-				<!-- Logger -->
+
+		<!-- Logger -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
@@ -49,12 +49,24 @@
 			<artifactId> jsonrpc2-base</artifactId>
 			<version>1.35</version>
 		</dependency>
+		<dependency>
+			<groupId>com.thetransactioncompany</groupId>
+			<artifactId>jsonrpc2-client</artifactId>
+			<version>1.14.4</version>
+		</dependency>
 
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.4.2</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>jsonRpcMinimal</finalName>
-		
-				<plugins>
+
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

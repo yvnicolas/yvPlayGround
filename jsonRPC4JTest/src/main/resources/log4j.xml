@@ -8,7 +8,7 @@
 		</layout>
 	</appender>
 
-	<logger name="com.dynamease.jsonRPC4JTest" additivity="false">
+	<logger name="com.dynamease" additivity="false">
 		<level value="debug" />
 		<appender-ref ref="console" />
 	</logger>

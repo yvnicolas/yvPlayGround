@@ -8,6 +8,9 @@ public class DynPerson {
     private String lastName;
 
 
+    public DynPerson() {
+        
+    }
    
     public DynPerson(String firstName, String lastName) {
         this.firstName = firstName;

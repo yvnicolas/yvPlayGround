@@ -2,6 +2,7 @@ package com.dynamease.jsonrpc.services;
 
 import com.dynamease.basicentities.DynPerson;
 import com.dynamease.basicentities.DynSubscriber;
+import com.googlecode.jsonrpc4j.JsonRpcParam;
 
 
 
@@ -14,13 +15,15 @@ public interface DynJsonUserService {
      * @param storePaymentReference
      * @returns a String representing the new validity date for the subscriber level status
      */
-    public String upgradeLevelPostStorePayment(String subscriberId, String upgradeDesc, String storePaymentReference);
+    public String upgradeLevelPostStorePayment(@JsonRpcParam("subId") String subscriberId, @JsonRpcParam("upgrade") String upgradeDesc, @JsonRpcParam("storeRef") String storePaymentReference);
     
     
-    public DynSubscriber retrieveFromEmail (String email);
+    public DynSubscriber retrieveFromEmail (@JsonRpcParam("email") String email);
     
-    public DynSubscriber guestSignUp(DynPerson newGuest, String email, String phone);
+    public DynSubscriber guestSignUp(@JsonRpcParam("Person") DynPerson newGuest, @JsonRpcParam("email") String email, @JsonRpcParam("phone")String phone);
     
-    public boolean subscriberSignin(String email, String password);
+    public boolean subscriberSignin(@JsonRpcParam("email") String email, @JsonRpcParam("pwd") String password);
+ 
     
+    // guestSignUp {"Person" : {"firstName":"Olivier", "lastName" : "Py"}, "email" : "th@kurt", "phone":"0232360162"}
 }
