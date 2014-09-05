@@ -62,6 +62,13 @@
 			<version>2.4.2</version>
 		</dependency>
 		
+		
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.3.2</version>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>jsonRpcMinimal</finalName>
