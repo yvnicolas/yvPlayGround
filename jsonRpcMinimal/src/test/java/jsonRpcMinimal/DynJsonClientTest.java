@@ -24,7 +24,7 @@ public class DynJsonClientTest {
     
     public static final DynCryptoServices crypter = new DynCryptoServicesImpl();
     
-    public static final String server = "http://bengarden.dynamease.net/";
+    public static final String server = "http://ariana.dynamease.net/";
    
 
     @Test
@@ -54,7 +54,7 @@ public class DynJsonClientTest {
     @Test
     public void testCallNber() throws Exception {
         JSONSession session = new JSONSession(new URI(server + "appless/communication"));
-        String result = session.sendJson("json", "{\"callerNumber\":\"0146740628\",\"calledNumber\":\"0185081578\"}");
+        String result = session.sendJson("json", "{\"callerNumber\":\"0556692250\",\"calledNumber\":\"0278990114\"}");
         logger.debug("result : {}", result);
     }
 
