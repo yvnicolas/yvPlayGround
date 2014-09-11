@@ -47,10 +47,10 @@ public class DynTestJsonRequestExecutor {
 
     private int currentId;
 
-    private DynTestJsonRequestExecutor(String server, Scanner inputScanner) {
+    public DynTestJsonRequestExecutor(String server, Scanner inputScanner) {
         super();
         this.inputScanner = inputScanner;
-        this.serverUrl = server;
+        this.serverUrl = "http://"+server;
 
     }
 
