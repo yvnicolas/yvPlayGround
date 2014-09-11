@@ -102,7 +102,7 @@ public class DynTestJsonRequestExecutor {
             request = new JSONRPC2Request(methodName, MAPPER.readValue(parameters, Map.class), currentId++);
             logger.debug("Processing request {}", request);
             response = jsonRpcSession.send(request);
-            return response.toString();
+            return cleanLastLine(response.toString());
 
             // } catch (IOException e1) {
             // logger.error("Exception processing parameters {} : {}", parameters, e1.getMessage());
@@ -119,6 +119,8 @@ public class DynTestJsonRequestExecutor {
         }
     }
 
+    
+
     private String historicJson(String relativeUrl) throws IOException {
         String header = null;
         String jsonRq = null;
@@ -127,7 +129,7 @@ public class DynTestJsonRequestExecutor {
             header = inputScanner.next();
             jsonRq = inputScanner.nextLine();
             logger.debug("Processing request : Header : {}, Json : {}", header, jsonRq);
-            return jsonSession.sendJson(header, jsonRq);
+            return cleanLastLine(jsonSession.sendJson(header, jsonRq));
         } catch (URISyntaxException e) {
             logger.error("Invalid Url : {} ({})", serverUrl + relativeUrl, e.getMessage());
             throw new IOException("Unable to process " + jsonRq, e);
@@ -136,6 +138,8 @@ public class DynTestJsonRequestExecutor {
            throw new IOException("Unable to process " + jsonRq, e);
         }
     }
-
+    private String cleanLastLine(String responseWithLn) {
+        return responseWithLn.substring(0, responseWithLn.length()-1);
+    }
   
 }
