@@ -9,6 +9,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 import org.slf4j.Logger;
@@ -32,7 +33,7 @@ public class DynTestRqFileProcessor {
     private static final Logger logger = LoggerFactory.getLogger(DynTestRqFileProcessor.class);
 
     private Scanner inputScanner;
-    private DataOutputStream outputStream;
+    private PrintStream outputStream;
     private boolean init = false;
     private DynTestJsonRequestExecutor requestExecutor;
 
@@ -45,24 +46,27 @@ public class DynTestRqFileProcessor {
      * @param outputFileLocation
      * @throws IOException 
      */
-    public DynTestRqFileProcessor (String serverUrl, InputStream input, OutputStream output) throws IOException {
+    public DynTestRqFileProcessor (String serverUrl, InputStream input, PrintStream output) throws IOException {
         if (input==null || output == null)
             throw new IOException("DynTestRqFileProcessor called with null input or null output");
         inputScanner = new Scanner(new BufferedInputStream(input));
-        outputStream = new DataOutputStream(new BufferedOutputStream(output));
+        outputStream = output;
         requestExecutor = new DynTestJsonRequestExecutor(serverUrl, inputScanner);
         logger.info(String.format("Test request file processor succesfully created for server %s", serverUrl));
+        init=true;
     }
     /**
      * Launches the actual processing
      * @return the number of request that were succesfully sent and processed by the server
      */
     public int process() {
+        if (!init)
+            return 0;
         int toReturn=0;
         while (requestExecutor.hasMore()) {
             try {
                 String response = requestExecutor.processLine();
-                outputStream.writeUTF(response);
+                outputStream.println(response);
                 logger.debug("Received : {}", response);
                 toReturn++;
             } catch (IOException e) {
@@ -71,13 +75,7 @@ public class DynTestRqFileProcessor {
                    logger.debug("Cause  : {}", e.getCause().toString());
             }
         }
-        try {
-            outputStream.close();
-        } catch (IOException e) {
-            logger.debug("Exception raised processing request : {}", e.getMessage());
-            if (e.getCause()!=null)
-                logger.debug("Cause : {}", e.getCause().getMessage());
-        }
+
         inputScanner.close();
         init=false;
         
