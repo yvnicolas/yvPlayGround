@@ -11,6 +11,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * process a file sending each line as a request to the appropriate DYnamease server and putting all
  * responses inside an output file
@@ -25,6 +28,8 @@ import java.util.Scanner;
  *
  */
 public class DynTestRqFileProcessor {
+    
+    private static final Logger logger = LoggerFactory.getLogger(DynTestRqFileProcessor.class);
 
     private Scanner inputScanner;
     private DataOutputStream outputStream;
@@ -46,6 +51,7 @@ public class DynTestRqFileProcessor {
         inputScanner = new Scanner(new BufferedInputStream(input));
         outputStream = new DataOutputStream(new BufferedOutputStream(output));
         requestExecutor = new DynTestJsonRequestExecutor(serverUrl, inputScanner);
+        logger.info(String.format("Test request file processor succesfully created for server %s", serverUrl));
     }
     /**
      * Launches the actual processing
@@ -55,18 +61,22 @@ public class DynTestRqFileProcessor {
         int toReturn=0;
         while (requestExecutor.hasMore()) {
             try {
-                outputStream.writeUTF(requestExecutor.processLine());
+                String response = requestExecutor.processLine();
+                outputStream.writeUTF(response);
+                logger.debug("Received : {}", response);
                 toReturn++;
             } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
+               logger.debug("Exception raised processing request : {}", e.getMessage());
+               if (e.getCause()!=null)
+                   logger.debug("Cause  : {}", e.getCause().toString());
             }
         }
         try {
             outputStream.close();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.debug("Exception raised processing request : {}", e.getMessage());
+            if (e.getCause()!=null)
+                logger.debug("Cause : {}", e.getCause().getMessage());
         }
         inputScanner.close();
         init=false;

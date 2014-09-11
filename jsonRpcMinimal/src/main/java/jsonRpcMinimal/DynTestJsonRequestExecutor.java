@@ -100,6 +100,7 @@ public class DynTestJsonRequestExecutor {
         try {
             jsonRpcSession = new JSONRPC2Session(new URL(serverUrl + relativeUrl));
             request = new JSONRPC2Request(methodName, MAPPER.readValue(parameters, Map.class), currentId++);
+            logger.debug("Processing request {}", request);
             response = jsonRpcSession.send(request);
             return response.toString();
 
@@ -125,6 +126,7 @@ public class DynTestJsonRequestExecutor {
             JSONSession jsonSession = new JSONSession(new URI(serverUrl+ relativeUrl));
             header = inputScanner.next();
             jsonRq = inputScanner.nextLine();
+            logger.debug("Processing request : Header : {}, Json : {}", header, jsonRq);
             return jsonSession.sendJson(header, jsonRq);
         } catch (URISyntaxException e) {
             logger.error("Invalid Url : {} ({})", serverUrl + relativeUrl, e.getMessage());
