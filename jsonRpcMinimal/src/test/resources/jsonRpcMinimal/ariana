@@ -1,0 +1,13 @@
+# Envoi de requetes tests sur serveur
+
+###########################################
+#   always avalaible request sent from Smartphone works fine (created with issue #274)
+###########################################
+
+# request setting Selma Bouzar always available from smartphone
+! /webapp/communication  json-setavailability  {"behaviour":{"FRIEND":"ALLOK","FAMILY":"ALLOK","PROFESSIONAL":"ALLOK"},"subId":28,"time":0}
+
+# trying a call
+
+!  /appless/communication  json  {"callerNumber":"0146740628","calledNumber":"0202020202"}
+
